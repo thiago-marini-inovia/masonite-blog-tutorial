@@ -1,0 +1,27 @@
+services:
+  web:
+    build: .
+    command: python craft serve -p 8000 -b 0.0.0.0
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    env_file:
+      - .env.dev
+  
+  db:
+    image: google/alloydbomni:16.3.0 # Use the desired image tag, e.g., 16.3.0 or 16.3.0-ubi
+    container_name: alloydb-omni
+    environment:
+      - POSTGRES_USER=masonite_user
+      - POSTGRES_PASSWORD=masonite_password
+      - POSTGRES_DB=masonite_db
+    ports:
+      - "5432:5432" # Map the container's PostgreSQL port to the host
+    volumes:
+      - alloydb_data:/var/lib/postgresql/data # Mount a named volume for persistent data
+    # ulimits:
+    #   nice: -20:-20 # Recommended for optimal performance
+    #   memlock: -1:-1 # Recommended for optimal performance
+volumes:
+  alloydb_data:
