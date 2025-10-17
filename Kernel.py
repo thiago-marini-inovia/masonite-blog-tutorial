@@ -13,13 +13,14 @@ from masonite.middleware import (
 from masonite.routes import Route
 from masonite.configuration.Configuration import Configuration
 from masonite.configuration import config
+from masonite.inertia import InertiaMiddleware
 
 from app.middlewares import VerifyCsrfToken, AuthenticationMiddleware
 
 
 class Kernel:
 
-    http_middleware = [MaintenanceModeMiddleware, EncryptCookies]
+    http_middleware = [MaintenanceModeMiddleware, EncryptCookies, InertiaMiddleware]
 
     route_middleware = {
         "web": [SessionMiddleware, LoadUserMiddleware, VerifyCsrfToken],

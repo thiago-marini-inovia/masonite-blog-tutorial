@@ -13,5 +13,10 @@
     "axios": "^0.22.0",
     "laravel-mix": "^6.0.39",
     "postcss": "^8.4.5"
+  },
+  "dependencies": {
+    "@inertiajs/inertia": "^0.11.1",
+    "@inertiajs/inertia-vue3": "^0.6.0",
+    "vue": "^3.5.22"
   }
 }
