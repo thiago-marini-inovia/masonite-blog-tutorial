@@ -5,14 +5,41 @@ const mix = require('laravel-mix')
 const path = require('path')
 
 
-mix.js('resources/js/app.js', 'storage/compiled/js')
+mix.js('resources/js/app.js', 'js')
   .vue({ version: 3 })
-  .postCss('resources/css/app.css', 'storage/compiled/css', [
+  .postCss('resources/css/app.css', 'css', [
     //
   ])
 
 // ensure root directory of mix is project root
-mix.setPublicPath(".")
+mix.setPublicPath("storage/compiled")
+
+// Enable HMR for development
+mix.webpackConfig({
+  devServer: {
+    host: '0.0.0.0',
+    port: 8080,
+    allowedHosts: 'all',
+    hot: true,
+    compress: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
+    client: {
+      webSocketURL: {
+        hostname: 'localhost',
+        pathname: '/ws',
+        port: 8080,
+        protocol: 'ws'
+      }
+    }
+  }
+}).options({
+  hmrOptions: {
+    host: '0.0.0.0',
+    port: 8080
+  }
+})
 
 // add an alias to js code
 mix.alias({
