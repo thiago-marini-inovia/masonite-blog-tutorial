@@ -19,11 +19,10 @@ RUN pip install --upgrade pip
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-# copy package files for npm install
-COPY ./package.json ./
-RUN npm install
-
 # copy project
 COPY . .
+RUN npm install
+RUN npm run dev
+
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

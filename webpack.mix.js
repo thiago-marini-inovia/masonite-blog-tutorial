@@ -6,6 +6,7 @@ const path = require('path')
 
 
 mix.js('resources/js/app.js', 'storage/compiled/js')
+  .vue({ version: 3 })
   .postCss('resources/css/app.css', 'storage/compiled/css', [
     //
   ])

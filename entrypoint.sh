@@ -11,8 +11,6 @@ then
     echo "PostgreSQL started"
 fi
 
-python craft migrate:refresh  # you may want to remove this
 python craft migrate
-python craft package:publish inertia
 
 exec "$@"
